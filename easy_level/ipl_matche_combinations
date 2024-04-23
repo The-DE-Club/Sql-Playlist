@@ -1,0 +1,26 @@
+create table ipl_teams 
+(
+	team_id varchar(6),
+	team_name varchar(30)
+);
+
+insert into ipl_teams 
+values ('CSK','Chennai Super Kings'),
+('DC','Delhi Capitals'),
+('GT','Gujarat Titans'),
+('KKR','Kolkata Knight Riders'),
+('LSG','Lucknow Super Giants'),
+('MI','Mumbai Indians'),
+('PBKS','Punjab Kings'),
+('RR','Rajasthan Royals'),
+('RCB','Royal Challengers Bengaluru'),
+('SRH','Sunrisers Hyderabad');
+
+with cte as (
+select it1.team_id||'  VS  '||it2.team_id as matches,
+it1.team_id as team_1,
+it2.team_id as team_2
+from ipl_teams it1,
+ipl_teams it2
+where it1.team_id>it2.team_id)
+select matches from cte where matches like 'CSK%CSK';
