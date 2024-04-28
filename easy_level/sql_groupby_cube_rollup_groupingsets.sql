@@ -36,4 +36,22 @@ VALUES
 ('12','9','109','US',22,59,'2022-08-21'),
 ('14','6','106','IN',24,56,'2022-08-25');
 
+SELECT
+	GROUPING(inventory_id) grouping_inv_id,
+	grouping(sub_inventory_id) grouping_sub_inv_id,
+	inventory_id,
+	sub_inventory_id ,
+	SUM (quantity*price_per_unit) total_price
+FROM
+	sales
+GROUP BY
+	GROUPING SETS (
+		(inventory_id),
+		(sub_inventory_id)
+	)
+ORDER BY
+	inventory_id,
+	sub_inventory_id;
+
+
 
