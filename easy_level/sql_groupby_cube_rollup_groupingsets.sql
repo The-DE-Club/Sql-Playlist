@@ -53,5 +53,30 @@ ORDER BY
 	inventory_id,
 	sub_inventory_id;
 
+-- rollups and cube 
 
+SELECT 
+	inventory_id,
+	sub_inventory_id,
+	SUM (quantity*price_per_unit) total_price
+FROM
+	sales
+GROUP BY
+	ROLLUP(inventory_id, sub_inventory_id)
+ORDER BY
+	inventory_id,
+	sub_inventory_id;
+
+
+SELECT 
+	inventory_id,
+	sub_inventory_id,
+	SUM (quantity*price_per_unit) total_price
+FROM
+	sales
+GROUP BY
+	CUBE(inventory_id, sub_inventory_id)
+ORDER BY
+	inventory_id,
+	sub_inventory_id;
 
